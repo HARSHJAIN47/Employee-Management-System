@@ -1,19 +1,24 @@
 import axiosInstance from "../axios";
+import * as actionTypes from "./ActionTypes";
 
-const postDataSuccess = (response) => ({
-  type: "post data",
-  response,
-});
-const postData = (obj) => (dispatch) => {
-  console.log(obj);
-  axiosInstance
-    .post("/login", obj)
-    .then((response) => {
-      dispatch(postDataSuccess(response));
+const postData = (userData) => async (dispatch) => {
+  await axiosInstance
+    .post("/login", {
+      email: userData.email,
+      password: userData.password,
     })
-    .catch((error) => {
-      console.error(error);
+    .then((res) => {
+      console.log("🚀 ~ file: PostDataAction.js ~ line 13 ~ .then ~ res", res);
+      dispatch({
+        type: actionTypes.POST_DATA_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      console.log(
+        "🚀 ~ file: PostDataAction.js ~ line 20 ~ postData ~ err",
+        err
+      );
     });
 };
-export default postDataSuccess;
-export { postData };
+export default postData;
