@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import postTheData from "./PostDataReducer";
+import userStateReducer from "./PostDataReducer";
 
 const rootReducer = combineReducers({
-  postTheData,
+  userState: userStateReducer,
 });
 
 export default rootReducer;

@@ -1,6 +1,7 @@
+/* eslint-disable default-param-last */
 const initialState = { isLoading: false, isAuthenticated: false };
 
-const postTheData = (action, state = initialState) => {
+const userStateReducer = (state = initialState, action) => {
   switch (action.type) {
     case "post data":
       return { ...state };
@@ -9,4 +10,4 @@ const postTheData = (action, state = initialState) => {
   }
 };
 
-export default postTheData;
+export default userStateReducer;

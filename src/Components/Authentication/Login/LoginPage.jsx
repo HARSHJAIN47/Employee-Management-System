@@ -45,7 +45,7 @@ function LoginPage() {
         email: enteredEmail,
         password: enteredPassword,
       };
-      dispatch(PostData({ obj: newLoginData }));
+      dispatch(PostData(newLoginData));
       setLoginData([...loginData, newLoginData]);
       setEnteredEmail("");
       setEnteredPassword("");
