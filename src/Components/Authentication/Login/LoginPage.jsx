@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import Container from "../../Styles/Container";
 import group from "../assets/group.svg";
 import amazatic from "../assets/amazatic(1).png";
@@ -18,6 +19,14 @@ function LoginPage() {
   const [loginData, setLoginData] = useState([]);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
+  const navigate = useNavigate();
+  const userState = useSelector((s) => s.userState.user);
+
+  useEffect(() => {
+    if (userState.email && localStorage.getItem("token")) {
+      navigate("/dashboard");
+    }
+  }, [userState, navigate]);
 
   const dispatch = useDispatch();
 
@@ -49,6 +58,7 @@ function LoginPage() {
       setLoginData([...loginData, newLoginData]);
       setEnteredEmail("");
       setEnteredPassword("");
+      // navigate("/dashboard");
     }
   };
 

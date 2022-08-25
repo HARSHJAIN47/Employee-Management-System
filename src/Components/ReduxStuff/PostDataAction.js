@@ -1,18 +1,22 @@
+import { Navigate } from "react-router-dom";
 import axiosInstance from "../axios";
 import * as actionTypes from "./ActionTypes";
 
-const postData = (userData) => async (dispatch) => {
+const PostData = (userData) => async (dispatch) => {
+  const body = {
+    email: userData.email,
+    password: userData.password,
+  };
   await axiosInstance
-    .post("/login", {
-      email: userData.email,
-      password: userData.password,
-    })
+    .post("/login", body)
     .then((res) => {
-      console.log("🚀 ~ file: PostDataAction.js ~ line 13 ~ .then ~ res", res);
+      console.log("🚀 ~ file: PostDataAction.js ~ line 12 ~ .then ~ res", res);
+      localStorage.setItem("token", res.data.token);
       dispatch({
         type: actionTypes.POST_DATA_SUCCESS,
-        payload: res.data,
+        payload: res.data.user,
       });
+      <Navigate to="/dashboard" />;
     })
     .catch((err) => {
       console.log(
@@ -21,4 +25,4 @@ const postData = (userData) => async (dispatch) => {
       );
     });
 };
-export default postData;
+export default PostData;

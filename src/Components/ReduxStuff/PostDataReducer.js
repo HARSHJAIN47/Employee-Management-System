@@ -1,15 +1,16 @@
 import * as actionTypes from "./ActionTypes";
 /* eslint-disable default-param-last */
 const initialState = {
-  // isLoading: false,
-  // isAuthenticated: false,
-  token: {},
+  user: { email: "", password: "" },
 };
 
 const userStateReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.POST_DATA_SUCCESS:
-      return { ...state, token: action.token };
+      return {
+        ...state,
+        user: action.payload,
+      };
     default:
       return state;
   }
