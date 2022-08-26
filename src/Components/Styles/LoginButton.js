@@ -11,6 +11,7 @@ const LoginButton = styled.button`
   box-shadow: 0px 5px 12px #021c1429;
   opacity: 1;
   margin-top: 30px;
+  outline: none;
 `;
 
 export default LoginButton;

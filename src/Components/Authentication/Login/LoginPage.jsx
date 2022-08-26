@@ -5,6 +5,7 @@ import Container from "../../Styles/Container";
 import group from "../assets/group.svg";
 import amazatic from "../assets/amazatic(1).png";
 import GlobalStyle from "../../Styles/GlobalStyle";
+import Loader from "../../Styles/Loader";
 import LoginButton from "../../Styles/LoginButton";
 import InputField from "../../Styles/InputField";
 import LoginForm from "../../Styles/LoginForm";
@@ -19,16 +20,17 @@ function LoginPage() {
   const [loginData, setLoginData] = useState([]);
   const [emailIsValid, setEmailIsValid] = useState(true);
   const [passwordIsValid, setPasswordIsValid] = useState(true);
+  const [loader, setLoader] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const userState = useSelector((s) => s.userState.user);
 
   useEffect(() => {
     if (userState.email && localStorage.getItem("token")) {
+      setLoader(false);
       navigate("/dashboard");
     }
   }, [userState, navigate]);
-
-  const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -50,15 +52,13 @@ function LoginPage() {
     if (enteredPassword.length < 6) {
       setPasswordIsValid(false);
     } else {
+      setLoader(true);
       const newLoginData = {
         email: enteredEmail,
         password: enteredPassword,
       };
       dispatch(PostData(newLoginData));
       setLoginData([...loginData, newLoginData]);
-      setEnteredEmail("");
-      setEnteredPassword("");
-      // navigate("/dashboard");
     }
   };
 
@@ -118,15 +118,8 @@ function LoginPage() {
               </div>
 
               <ForgPass href="/">Forgot Your Password?</ForgPass>
-              <LoginButton>Login</LoginButton>
+              <LoginButton>{loader ? <Loader /> : "Login"}</LoginButton>
             </LoginForm>
-          </div>
-          <div className="col-md-12">
-            {loginData.map((i) => (
-              <div key={new Date().getTime().toString()}>
-                Email: {i.email} Password: {i.password}
-              </div>
-            ))}
           </div>
         </div>
       </Container>

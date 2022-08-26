@@ -6,7 +6,6 @@ import LoginButton from "./Styles/LoginButton";
 function DashBoard() {
   const navigate = useNavigate();
   const userData = useSelector((s) => s.userState.user);
-  console.log(userData);
   return (
     <>
       <h1>

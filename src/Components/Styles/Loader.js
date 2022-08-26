@@ -7,9 +7,8 @@ const Loader = styled.div`
   width: 30px;
   height: 30px;
   position: relative;
-  top: 498px;
-  right: -1100px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
+  left: 140px;
+  -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
   z-index: 2;
 `;
