@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Container from "../../Styles/Container";
 import group from "../assets/group.svg";
@@ -23,14 +23,14 @@ function LoginPage() {
   const [loader, setLoader] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userState = useSelector((s) => s.userState.user);
+  // const userState = useSelector((s) => s.userState.user);
 
-  useEffect(() => {
-    if (userState.email && localStorage.getItem("token")) {
-      setLoader(false);
-      navigate("/dashboard");
-    }
-  }, [userState, navigate]);
+  // useEffect(() => {
+  //   if (userState.email && localStorage.getItem("token")) {
+  //     setLoader(false);
+  //     navigate("/dashboard");
+  //   }
+  // }, [userState, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ function LoginPage() {
         email: enteredEmail,
         password: enteredPassword,
       };
-      dispatch(PostData(newLoginData));
+      dispatch(PostData(newLoginData, navigate));
       setLoginData([...loginData, newLoginData]);
     }
   };

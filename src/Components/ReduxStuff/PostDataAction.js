@@ -1,7 +1,7 @@
 import axiosInstance from "../axios";
 import * as actionTypes from "./ActionTypes";
 
-const PostData = (userData) => async (dispatch) => {
+const PostData = (userData, navigate) => async (dispatch) => {
   const body = {
     email: userData.email,
     password: userData.password,
@@ -12,6 +12,7 @@ const PostData = (userData) => async (dispatch) => {
       type: actionTypes.POST_DATA_SUCCESS,
       payload: res.data.user,
     });
+    navigate("/dashboard");
   });
 };
 export default PostData;
